@@ -16,6 +16,9 @@ Node *create_node(int data) {
     new_node->data = data;
     new_node->prev = NULL;
     new_node->next = NULL;
+    if (head == NULL){
+        head = new_node;
+    }
     return new_node;
 }
 
@@ -44,7 +47,6 @@ void print_all() {
 // delete the node attributed to the data given from the list
 bool delete_node(int data) {
     Node *current = head;
-    bool found = false;
     while (current != NULL) {
         if (current->data == data) {
             if (current == head) {
@@ -58,12 +60,29 @@ bool delete_node(int data) {
                     current->next->prev = current->prev;
                 }
             }
-            found = true;
             free(current);
             current = NULL;
             break;
         }
         current = current->next;
     }
-    return found;
+}
+
+Node *pop_head(){
+    Node *old_head = head;
+    head = old_head->next;
+    return old_head;
+}
+
+Node *pop_tail(){
+    Node *current = head;
+
+    while (current){
+        if (current->next == NULL){
+            current->prev->next = NULL;
+            return current;
+        }
+        current = current->next;
+    }
+    
 }
