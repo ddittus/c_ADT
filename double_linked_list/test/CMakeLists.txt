@@ -1,0 +1,26 @@
+enable_testing()
+include(GoogleTest)
+
+add_executable(
+        runTests
+        tests.cpp
+)
+target_link_libraries(
+        runTests
+        PUBLIC
+        d_list
+        gtest
+        gtest_main
+)
+target_compile_options(
+        runTests
+        PUBLIC
+        -Wall
+        -Wextra
+        -Wpedantic
+        -Wformat
+        -Wvla
+        -Wfloat-equal
+        -Werror
+)
+gtest_discover_tests(runTests)

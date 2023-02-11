@@ -1,12 +1,8 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
-typedef struct Node {
-    int data;
-    struct Node *prev;
-    struct Node *next;
-} Node;
+#include <d_list.h>
 
 Node *head = NULL;  // global head pointer
 
@@ -45,7 +41,7 @@ void print_all() {
 }
 
 // delete the node attributed to the data given from the list
-bool delete_node(int data) {
+void delete_node(int data) {
     Node *current = head;
     while (current != NULL) {
         if (current->data == data) {
