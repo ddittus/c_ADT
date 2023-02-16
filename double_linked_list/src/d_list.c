@@ -15,9 +15,6 @@ Node *create_node(void *data) {
     new_node->data = data;
     new_node->prev = NULL;
     new_node->next = NULL;
-    if (head == NULL) {
-        head = new_node;
-    }
     return new_node;
 }
 
@@ -54,15 +51,6 @@ void insert_at_tail(void *data) {
 
 // Function to print the data of every node in the list
 // Uses a function provided by the user as an argument in order to print specific data types.
-// For example:
-// void print_int(void *data) {
-//     int value = *(int *)data;
-//     printf("%d ", value);
-// }
-
-// int main() {
-//     print_all(print_int);
-// }
 void print_all(void (*print_data)(void *)) {
     Node *current = head;
     while (current != NULL) {
@@ -74,20 +62,8 @@ void print_all(void (*print_data)(void *)) {
 
 // Function to delete the node attributed to the given data from the list.
 // Uses a pointer to a function provided by the user in order to compare and delete specific data types.
-// For example:
-// int compare_int(void *node_data, void *search_data) {
-//     int node_value = *(int *)node_data;
-//     int search_value = *(int *)search_data;
-//     return node_value - search_value;
-// }
-
-// int main(){
-//     int search_value = 3;
-//     delete_node(search_value, compare_int);
-// }
 void delete_node(void *data, int (*compare_data)(void *, void *)) {
-    if (head == NULL){
-        printf("Head not found.\n");
+    if (head == NULL) {
         return;
     }
     Node *current = head;
@@ -105,11 +81,7 @@ void delete_node(void *data, int (*compare_data)(void *, void *)) {
                 }
             }
             free(current);
-            current = NULL;
             break;
-        }
-        if (current->next == NULL){
-            printf("Node was not found.\n");
         }
         current = current->next;
     }
