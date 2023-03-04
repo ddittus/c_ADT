@@ -1,6 +1,8 @@
 #ifndef D_LIST_H
 #define D_LIST_H
 
+#include <error_handler.h>
+
 #ifdef __cplusplus
 extern "C"
 {
@@ -13,7 +15,7 @@ typedef struct Node {
 } Node;
 
 /**
- * @brief Create a node object
+ * @brief Create a node object.
  * 
  * @param data 
  * @return Node* 
@@ -24,20 +26,31 @@ Node *create_node(void *data);
  * @brief Insert given data at the head of the linked list.
  * 
  * @param data 
+ * @return ErrorCode 
  */
-void insert_at_head(void *data);
+ErrorCode insert_at_head(void *data);
 
 /**
  * @brief Function to insert a new node at the tail of the list.
  * 
  * @param data 
+ * @return ErrorCode 
  */
-void insert_at_tail(void *data);
+ErrorCode insert_at_tail(void *data);
+
+/**
+ * @brief Function to insert a new node at the given position.
+ * 
+ * @param data 
+ * @param position 
+ * @return ErrorCode 
+ */
+ErrorCode insert_at_position(void *data, int position);
 
 /**
  * @brief Function to print the data of every node in the list. Uses a function provided by the user as an argument in order to print specific data types.
  * 
- * @param print_data - Function pointer for printing.
+ * @param print_data 
  */
 void print_all(void (*print_data)(void *));
 
@@ -45,45 +58,59 @@ void print_all(void (*print_data)(void *));
  * @brief Function to delete the node attributed to the given data from the list. Uses a pointer to a function provided by the user in order to compare and delete specific data types.
  * 
  * @param data 
- * @param compare_data - Function pointer for data comparison.
+ * @param compare_data 
+ * @return ErrorCode 
  */
-void delete_node(void *data, int (*compare_data)(void *, void *));
+ErrorCode delete_node(void *data, int (*compare_data)(void *, void *));
 
 /**
- * @brief Function to remove and return the head node
+ * @brief Sets the out_node to the head node.
  * 
- * @return Node* 
+ * @param out_node 
+ * @return ErrorCode 
  */
-Node *pop_head(void);
+ErrorCode pop_head(Node **out_node);
 
 /**
- * @brief Function to remove and return the tail node
+ * @brief Sets the out_node to the tail node.
  * 
- * @return Node* 
+ * @param out_node 
+ * @return ErrorCode 
  */
-Node *pop_tail(void);
+ErrorCode pop_tail(Node **out_node);
 
 /**
- * @brief Returns the data at the head of the list
+ * @brief Sets the out_data equal to the data of the head node.
  * 
- * @return void* 
+ * @param out_data 
+ * @return ErrorCode 
  */
-void *peek_head(void);
+ErrorCode peek_head(void **out_data);
 
 /**
- * @brief Returns the data at the tail of the list
+ * @brief Sets the out_data equal to the data of the tail node.
  * 
- * @return void* 
+ * @param out_data 
+ * @return ErrorCode 
  */
-void *peek_tail(void);
+ErrorCode peek_tail(void **out_data);
 
 /**
- * @brief Returns the data at the index of the list
+ * @brief Sets the out_data equal to the data at the given index.
  * 
  * @param index 
- * @return void* 
+ * @param out_data 
+ * @return ErrorCode 
  */
-void *peek_at(int index);
+ErrorCode peek_at(int index, void **out_data);
+
+/**
+ * @brief Sets the out_length equal to the length of the linked list.
+ * 
+ * @param out_length 
+ * @return ErrorCode 
+ */
+ErrorCode list_length(int *out_length);
 
 #ifdef __cplusplus
 }
