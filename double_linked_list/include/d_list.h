@@ -1,7 +1,7 @@
 #ifndef D_LIST_H
 #define D_LIST_H
 
-#include <error_handler.h>
+#include "error_handler.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -15,10 +15,11 @@ typedef struct Node {
 } Node;
 
 /**
- * @brief Create a node object.
+ * @brief Create a node object
  * 
+ * @param out_node 
  * @param data 
- * @return Node* 
+ * @return ErrorCode 
  */
 Node *create_node(void *data);
 

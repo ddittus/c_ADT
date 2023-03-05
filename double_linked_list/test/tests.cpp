@@ -52,9 +52,9 @@ TEST_F(LinkedListTest, PrintAll) {
 }
 
 TEST_F(LinkedListTest, CreateNode) {
-    int data = 42;
+    int data = 69;
     Node *node = create_node(&data);
-    EXPECT_EQ(42, *(int *)node->data);
+    EXPECT_EQ(69, *(int *)node->data);
     EXPECT_EQ(NULL, node->prev);
     EXPECT_EQ(NULL, node->next);
     free(node);
