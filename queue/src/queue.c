@@ -1,6 +1,6 @@
 #include <stdio.h>
-
-
+#include <stdlib.h>
+#include <queue.h>
 
 struct queue_node 
 {
@@ -15,7 +15,7 @@ struct queue
     int                 count;
 };
 
-#include <queue.h>
+
 queue_t *queue_init() 
 {
     queue_t *queue = calloc(1, sizeof(queue_t));
@@ -26,9 +26,9 @@ queue_t *queue_init()
     return queue;
 }
 
-void queue_destroy(queue_t *queue) 
+void queue_destroy(queue_t **queue) 
 {
-    queue_node_t *current = queue->first;
+    queue_node_t *current = (*queue)->first;
 
     while (NULL != current) 
     {
@@ -38,7 +38,8 @@ void queue_destroy(queue_t *queue)
         current = next;
     }
 
-    free(queue);
+    free(*queue);
+    *queue = NULL;
 }
 
 void queue_enqueue(queue_t *queue, void *data) 
