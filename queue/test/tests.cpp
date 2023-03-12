@@ -20,7 +20,7 @@ TEST_F(LinkedListTest, PrintAll) {
     /*
     variable
     variable
-    EXPECT_EQ(, error);
+    EXPECT_EQ(number, variable);
     */
 }
 
