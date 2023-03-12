@@ -51,6 +51,40 @@ TEST_F(QueueTest, DestroyQueue) {
   EXPECT_EQ(NULL, queue);
 }
 
+TEST_F(QueueTest, CountItems) {
+  queue_t *queue = queue_init();
+  int value1 = 10;
+  int value2 = 20;
+  int value3 = 30;
+
+  // Test that the queue count starts at 0
+  EXPECT_EQ(0, queue_count(queue));
+
+  queue_enqueue(queue, &value1);
+  queue_enqueue(queue, &value2);
+
+  // Test that the queue count increases after enqueuing items
+  EXPECT_EQ(2, queue_count(queue));
+
+  queue_enqueue(queue, &value3);
+
+  // Test that the queue count updates after enqueuing another item
+  EXPECT_EQ(3, queue_count(queue));
+
+  queue_dequeue(queue);
+
+  // Test that the queue count updates after dequeuing an item
+  EXPECT_EQ(2, queue_count(queue));
+
+  queue_dequeue(queue);
+  queue_dequeue(queue);
+
+  // Test that the queue count decreases after dequeuing all items
+  EXPECT_EQ(0, queue_count(queue));
+
+  queue_destroy(&queue);
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
