@@ -81,3 +81,8 @@ void *queue_dequeue(queue_t *queue)
     free(node);
     return data;
 }
+
+int queue_count(queue_t *queue) 
+{
+    return queue->count;
+}
