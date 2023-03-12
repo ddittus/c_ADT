@@ -1,10 +1,11 @@
 #include <gtest/gtest.h>
 #include <gtest/gtest_prod.h>
-#include <d_list.h>
+#include <queue.h>
+#include <stdlib.h>
 #include <error_handler.h>
 
 
-class LinkedListTest : public ::testing::Test {
+class QueueTest : public ::testing::Test {
  protected:
 
   virtual void SetUp() {
@@ -16,12 +17,38 @@ class LinkedListTest : public ::testing::Test {
   }
 };
 
-TEST_F(LinkedListTest, PrintAll) {
-    /*
-    variable
-    variable
-    EXPECT_EQ(number, variable);
-    */
+TEST_F(QueueTest, EnqueueAndDequeue) {
+  queue_t* queue = queue_init();
+
+  int value1 = 10;
+  int value2 = 20;
+  int value3 = 30;
+
+  queue_enqueue(queue, &value1);
+  queue_enqueue(queue, &value2);
+  queue_enqueue(queue, &value3);
+
+  EXPECT_EQ(&value1, queue_dequeue(queue));
+  EXPECT_EQ(&value2, queue_dequeue(queue));
+  EXPECT_EQ(&value3, queue_dequeue(queue));
+  EXPECT_EQ(NULL, queue_dequeue(queue));
+
+  queue_destroy(&queue);
+}
+
+TEST_F(QueueTest, DestroyQueue) {
+  queue_t *queue = queue_init();
+  int *data1 = (int*)calloc(1, sizeof(int));;
+  int *data2 = (int*)calloc(1, sizeof(int));;
+  *data1 = 1;
+  *data2 = 2;
+  queue_enqueue(queue, data1);
+  queue_enqueue(queue, data2);
+
+  queue_destroy(&queue);
+
+  // Test that the queue is destroyed
+  EXPECT_EQ(NULL, queue);
 }
 
 int main(int argc, char **argv) {

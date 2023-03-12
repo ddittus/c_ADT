@@ -13,7 +13,7 @@ typedef struct queue queue_t;
 
 
 queue_t *queue_init();
-void queue_destroy(queue_t *queue);
+void queue_destroy(queue_t **queue);
 void queue_enqueue(queue_t *queue, void* data);
 void* queue_dequeue(queue_t *queue);
 int queue_count(queue_t *queue);
